@@ -1,0 +1,22 @@
+{
+  "name": "bump",
+  "version": "1.0.0",
+  "description": "Bump - A 2D Collision library for Pixi (v3.0.11) ========================================",
+  "main": "index.js",
+  "bin": {
+    "bump": "bump.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lycwed/bump.git"
+  },
+  "author": "kittykatattack",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lycwed/bump/issues"
+  },
+  "homepage": "https://github.com/lycwed/bump#readme"
+}
