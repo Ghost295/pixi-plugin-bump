@@ -1,6 +1,6 @@
 {
   "name": "pixi-plugin-bump",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Bump - A 2D Collision library for Pixi (v4)",
   "author": "kittykatattack",
   "contributors": [
@@ -32,10 +32,9 @@
     "package.json",
     "README.md"
   ],
-  "dependencies": {
-    "glslify": "^5.0.2"
-  },
+  "types": "pixi-plugin-bump.d.tss",
   "devDependencies": {
+    "glslify": "^5.0.2",
     "browserify-versionify": "^1.0.6",
     "del": "^2.2.0",
     "jaguarjs-jsdoc": "^1.0.1",

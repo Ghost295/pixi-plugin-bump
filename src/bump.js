@@ -1360,7 +1360,6 @@ Bump.prototype._getCenter = function(o, dimension, axis) {
   */
 
 Bump.prototype.hit = function(a, b, react, bounce, global, extra) {
-  if (!extra) extra = undefined;
   //Local references to bump's collision methods
   var hitTestPoint = this.hitTestPoint.bind(this),
     hitTestRectangle = this.hitTestRectangle.bind(this),
@@ -1384,7 +1383,6 @@ Bump.prototype.hit = function(a, b, react, bounce, global, extra) {
     //If one of the arguments isn't an array, find out what type of
     //collision check to run
     collision = findCollisionType(a, b);
-    if (collision && extra) extra(collision);
   }
 
   //Return the result of the collision.

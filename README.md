@@ -1,62 +1,48 @@
-Bump - A 2D Collision library for Pixi (v3.0.11)
-========================================
+# Bump - A 2D Collision library for Pixi (v4)
+
+[(based on)](https://github.com/kittykatattack/bump)
 
 Bump is a lightweight suite of easy-to-use 2D collision methods for use with the
 Pixi rendering engine. You can use these methods to make almost any
 kind of 2D action or arcade game.
 
-(Important! this library targets Pixi v3.0.11, which is the most stable version of Pixi, and is the only version I can recommend using. This library will eventually be upgraded for Pixi v4 when the v4 branch matures.)
+## Install
 
-[Setting up](#settingup) <br>
-[Using Bump's collision methods](#using) <br>
-[Hit](#hit): A universal collision detection method <br>
-[hitTestPoint](#hittestpoint): Check whether a point is intersecting a sprite <br>
-[hitTestCircle](#hittestcircle): Check whether 2 circles are touching <br>
-[circleCollision](#circlecollision): Bounce a moving circle against a stationary circle <br>
-[movingCircleCollision](#movingcirclecollision): Bounce two moving circles apart <br>
-[hitTestRectangle](#hittestrectangle): Check whether two rectangular or square sprites are touching <br>
-[rectangleCollision](#rectanglecollision): Prevent two rectangular sprites from intersecting <br>
+`npm i -S pixi-plugin-bump`
+
+[Hit](#hit): A universal collision detection method
+[hitTestPoint](#hittestpoint): Check whether a point is intersecting a sprite
+[hitTestCircle](#hittestcircle): Check whether 2 circles are touching
+[circleCollision](#circlecollision): Bounce a moving circle against a stationary circle
+[movingCircleCollision](#movingcirclecollision): Bounce two moving circles apart
+[hitTestRectangle](#hittestrectangle): Check whether two rectangular or square sprites are touching
+[rectangleCollision](#rectanglecollision): Prevent two rectangular sprites from intersecting
 [hitTestCircleRectangle](#hittestcirclerectangle): Check whether a rectangular and circular sprite are touching<br>
-[circleRectangleCollision](#circlerectanglecollision): Bounce a circular sprite against a rectangular sprite <br>
-[contain](#contain): Contain a sprite inside the boundaries of another rectangular sprite <br>
+[circleRectangleCollision](#circlerectanglecollision): Bounce a circular sprite against a rectangular sprite
+[contain](#contain): Contain a sprite inside the boundaries of another rectangular sprite
 
-<a id="settingup"></a>
-Installing and setting up Bump
-------------------------------
+## Import in typescript
 
-Use a `<script>` tag to link the `bump.js` file to your HTML document.
+```typescript
+import "pixi.js";
+import "pixi-plugin-bump";
 ```
-<script src="bump.js"></script>
-```
-(If you prefer, you can load `bump.js` using any JavaScript module
-system you might be familiar working with: ES6 modules, SystemJS, AMD or CommonJS.) 
-The Bump source files contain both ES5 and ES6 versions of the
-`bump.js` code. You should probably use the ES5 version for production
-code.
 
-Next, create a new instance of Bump at the beginning of your program.
-Supply the renderer you want to use in the constructor (the defautl is `PIXI`) like this:
-```
-b = new Bump(PIXI);
-```
-The variable `b` (for "bump", of course!) now represents the running
-instance of Bump that you can use to access all of Bump’s collision methods.
-
-<a id="using"></a>
-Using Bump's collision methods
-------------------------------
+## Using Bump's collision methods
 
 Using Bump is just a matter of choosing the collision method you want to
 use, and applying it based on the examples ahead. Just append `b` (or
 whatever variable name you chose for the Bump instance) to the
 beginning of each method, like this:
-```js
+
+```typescript
+let b = new PIXI.extras.Bump();
 b.hitTestRectangle(spriteOne, spriteTwo);
 ```
+
 Here are all the collision methods you can use:
 
-<a id="hit"></a>
-###`hit`
+## hit
 
 `hit` is a universal collision function. It automatically detects the
 kinds of sprites that are being used in the collision and chooses the
@@ -65,9 +51,11 @@ having to remember which of the many collision functions in Bump's
 library to use, you only need remember one: `hit`.
 
 In its simplest form, you can use `hit` like this: 
+
+```typescript
+b.hit(spriteOne, spriteTwo)
 ```
-hit(spriteOne, spriteTwo)
-```
+
 It will return `true` if the sprites are touching and `false` if they
 aren't.
 And that’s all you need to know to start making some truly captivating games!
@@ -76,46 +64,58 @@ The sprites can be circles or rectangles. Bump's methods assumes
 they're rectangular by default. But if you want the methods to
 interpret a sprite as circular, give it a `circular` property and set
 it to `true`.
+
 ```js
 anySprite.circular = true;
 ```
+
 If you want the sprites to react to the collision, so that they don’t
 intersect, set the third argument to `true`. 
+
 ```js
 hit(spriteOne, spriteTwo, true)
 ```
+
 This prevents them from overlapping, so it's useful for making walls,
 floors, or any other kind of solid boundary.
 
 If you want the sprites to bounce apart, set the fourth argument to `true`. 
+
 ```js
 hit(spriteOne, spriteTwo, true, true)
 ```
+
 Now your sprites will bounce!
 
 Setting the fifth argument to `true`  makes the `hit` method  use the
 sprites’ **global coordinates**.
+
 ```
 hit(spriteOne, spriteTwo, true, true, true)
 ```
+
 The global coordinates are the sprites positions relative to the
 canvas's top left corner, instead of the top left corner of their
 parent container (their local coordinates.)
 
 If you want to check a point object for a collision against a sprite, use the point as the first argument,
 like this:
+
 ```js
 hit({x: 145, y:65}, sprite)
 ```
+
 A point object is just any object with two properties, `x` and `y`, that
 define the point's position.
 
 The `hit` method also lets you check for a collision between a sprite and an array of sprites. Just include
 the array as the second argument. In this example the array is called
 `bricks.children`:
+
 ```js
 hit(ball, bricks.children, true, true, true);
 ```
+
 You'll see that `hit` automatically loops through all the sprites in
 the array for you and checks them against the first sprite. This means
 you don’t have to write your own `for` loop or `forEach` loop.
@@ -123,10 +123,12 @@ you don’t have to write your own `for` loop or `forEach` loop.
 The `hit` function also returns a collision object, with a return
 value that matches the kinds of sprites you’re checking. For example, 
 if both sprites are rectangles, you could find the side on which the collision occurred like this:
+
 ```js
 let collision = hit(rectangleOne, rectangleTwo, true);
 message.text = "collision side: " + collision;
 ```
+
 `collision` will always be `undefined` if there’s no collision.
 
 A final feature is that you can use an optional callback function as
@@ -137,6 +139,7 @@ collision, the callback will run, and you can access both the collision
 return value and the sprite involved in the collision. Here’s how you 
 could use this feature to check for a collision between a sprite
 called `player` and an array of sprites in an array called `world.platforms`:
+
 ```js
 let playerVsPlatforms = hit(
   player, 
@@ -150,6 +153,7 @@ let playerVsPlatforms = hit(
   }
 );
 ```
+
 This is a compact way of doing complex collision checks that gives you a 
 lot of information and low-level control but saves you from having to 
 manually loop through all the sprites in the array.
