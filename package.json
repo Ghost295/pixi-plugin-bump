@@ -1,10 +1,7 @@
 {
   "name": "lycwed-bump",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Bump - A 2D Collision library for Pixi (v3.0.11)",
-  "bin": {
-    "bump": "bump.js"
-  },
   "main": "bin/bump.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
