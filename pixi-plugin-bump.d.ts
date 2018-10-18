@@ -8,7 +8,7 @@ declare namespace PIXI.extras {
     hitTestCircle(c1: PIXI.Circle, c2: PIXI.Circle, global: boolean): void;
     circleCollision(c1: PIXI.Circle, c2: PIXI.Circle, bounce: boolean, global: boolean): void;
     movingCircleCollision(c1: PIXI.Circle, c2: PIXI.Circle, global: boolean): void;
-    multipleCircleCollision(circlesArr: PIXI.Circle[], global: boolean): void;
+    multipleCircleCollision(circles: PIXI.Circle[], global: boolean): void;
     rectangleCollision(r1: PIXI.Rectangle, r2, bounce: boolean, global: boolean): void;
     hitTestRectangle(r1: PIXI.Rectangle, r2, global: boolean): void;
     hitTestCircleRectangle(c1: PIXI.Circle, r1: PIXI.Rectangle, global: boolean): void;
@@ -26,7 +26,7 @@ declare namespace PIXI.extras {
     _getCenter(o, dimension, axis): void;
     hit(
       sprite: PIXI.Sprite | PIXI.extras.AnimatedSprite,
-      spritesArr: PIXI.Sprite[] | PIXI.extras.AnimatedSprite[],
+      sprites: PIXI.DisplayObject[],
       react: boolean,
       bounce: boolean,
       global: boolean,
