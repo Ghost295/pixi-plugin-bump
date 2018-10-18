@@ -1,6 +1,6 @@
 /*!
- * pixi-plugin-bump - v1.0.5
- * Compiled Thu, 18 Oct 2018 00:08:47 UTC
+ * pixi-plugin-bump - v1.1.0
+ * Compiled Thu, 18 Oct 2018 20:43:52 UTC
  *
  * pixi-plugin-bump is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -12,9 +12,10 @@
  *
  * @class
  * @memberof PIXI.extras
+ * @extends PIXI.DisplayObject
  */
-function Bump(type) {
-  this.rendererType = type || "pixi";
+function Bump() {
+  this.rendererType = "pixi";
 }
 
 Bump.prototype = new Bump();
