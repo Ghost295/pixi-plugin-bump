@@ -1,6 +1,6 @@
 /*!
- * pixi-plugin-bump - v1.0.3
- * Compiled Wed, 17 Oct 2018 23:13:06 UTC
+ * pixi-plugin-bump - v1.0.5
+ * Compiled Thu, 18 Oct 2018 00:08:47 UTC
  *
  * pixi-plugin-bump is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -13,11 +13,11 @@
  * @class
  * @memberof PIXI.extras
  */
-function Bump() {
-  this.renderer = "pixi";
+function Bump(type) {
+  this.rendererType = type || "pixi";
 }
 
-Bump.prototype.constructor = Bump;
+Bump.prototype = new Bump();
 
 //`addCollisionProperties` adds extra properties to sprites to help
 //simplify the collision code. It won't add these properties if they
@@ -27,7 +27,7 @@ Bump.prototype.constructor = Bump;
 //new properties
 Bump.prototype.addCollisionProperties = function(sprite) {
   //Add properties to Pixi sprites
-  if (this.renderer === "pixi") {
+  if (this.rendererType === "pixi") {
     //gx
     if (sprite.gx === undefined) {
       Object.defineProperty(sprite, "gx", {
@@ -1368,7 +1368,6 @@ Bump.prototype._getCenter = function(o, dimension, axis) {
   */
 
 Bump.prototype.hit = function(a, b, react, bounce, global, extra) {
-  if (!extra) extra = undefined;
   //Local references to bump's collision methods
   var hitTestPoint = this.hitTestPoint.bind(this),
     hitTestRectangle = this.hitTestRectangle.bind(this),
@@ -1392,7 +1391,6 @@ Bump.prototype.hit = function(a, b, react, bounce, global, extra) {
     //If one of the arguments isn't an array, find out what type of
     //collision check to run
     collision = findCollisionType(a, b);
-    if (collision && extra) extra(collision);
   }
 
   //Return the result of the collision.

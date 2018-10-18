@@ -5,11 +5,11 @@
  * @class
  * @memberof PIXI.extras
  */
-function Bump() {
-  this.renderer = "pixi";
+function Bump(type) {
+  this.rendererType = type || "pixi";
 }
 
-Bump.prototype.constructor = Bump;
+Bump.prototype = new Bump();
 
 //`addCollisionProperties` adds extra properties to sprites to help
 //simplify the collision code. It won't add these properties if they
@@ -19,7 +19,7 @@ Bump.prototype.constructor = Bump;
 //new properties
 Bump.prototype.addCollisionProperties = function(sprite) {
   //Add properties to Pixi sprites
-  if (this.renderer === "pixi") {
+  if (this.rendererType === "pixi") {
     //gx
     if (sprite.gx === undefined) {
       Object.defineProperty(sprite, "gx", {
