@@ -2,7 +2,7 @@
 declare namespace PIXI.extras {
   class Bump {
     public renderer: string;
-    constructor(displayObject: PIXI.DisplayObject);
+    constructor();
     addCollisionProperties(sprite: PIXI.Sprite | PIXI.extras.AnimatedSprite): void;
     hitTestPoint(point: { x: number; y: number }, sprite: PIXI.Sprite | PIXI.extras.AnimatedSprite): void;
     hitTestCircle(c1: PIXI.Circle, c2: PIXI.Circle, global: boolean = false): void;

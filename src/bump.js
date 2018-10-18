@@ -6,13 +6,11 @@
  * @memberof PIXI.extras
  * @extends PIXI.DisplayObject
  */
-function Bump(display) {
+function Bump() {
   this.rendererType = "pixi";
-  PIXI.DisplayObject.call(this, display);
 }
 
-Bump.prototype = Object.create(PIXI.DisplayObject.prototype);
-Bump.prototype.contructor = Bump;
+Bump.prototype = new Bump();
 
 //`addCollisionProperties` adds extra properties to sprites to help
 //simplify the collision code. It won't add these properties if they
