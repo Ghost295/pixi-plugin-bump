@@ -1,6 +1,6 @@
 {
   "name": "pixi-plugin-bump",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Bump - A 2D Collision library for Pixi (v4)",
   "author": "kittykatattack",
   "contributors": [
