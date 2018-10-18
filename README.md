@@ -1,6 +1,6 @@
 # Bump - A 2D Collision library for Pixi (v4)
 
-[(based on)](https://github.com/kittykatattack/bump)
+[(based on bump)](https://github.com/kittykatattack/bump)
 
 Bump is a lightweight suite of easy-to-use 2D collision methods for use with the
 Pixi rendering engine. You can use these methods to make almost any
