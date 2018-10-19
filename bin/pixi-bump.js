@@ -1,6 +1,6 @@
 /*!
- * pixi-plugin-bump - v1.1.3
- * Compiled Fri, 19 Oct 2018 14:50:56 UTC
+ * pixi-plugin-bump - v1.1.4
+ * Compiled Fri, 19 Oct 2018 19:59:48 UTC
  *
  * pixi-plugin-bump is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -1490,7 +1490,7 @@ Bump.prototype.hitTest = function(displayObject, displayObjects) {
     right: false,
   };
 
-  for (var i = 0; i < displayObjects.length; i++) {
+  for (var i = displayObjects.length - 1; i >= 0; i--) {
     var displayObject2 = displayObject[i];
 
     if (displayObject.x < displayObject2.x + displayObject2.width) {
@@ -1524,7 +1524,7 @@ Bump.prototype.hitTestDirections = function(displayObject, displayObjects, direc
 
 // Only hitTest left side of the object
 Bump.prototype.hitTestLeft = function(displayObject, displayObjects) {
-  for (var i = 0; i < displayObjects.length; i++) {
+  for (var i = displayObjects.length - 1; i >= 0; i--) {
     var displayObject2 = displayObject[i];
 
     if (displayObject.x < displayObject2.x + displayObject2.width) {
@@ -1535,7 +1535,7 @@ Bump.prototype.hitTestLeft = function(displayObject, displayObjects) {
 
 // Only hitTest right side of the object
 Bump.prototype.hitTestRight = function(displayObject, displayObjects) {
-  for (var i = 0; i < displayObjects.length; i++) {
+  for (var i = displayObjects.length - 1; i >= 0; i--) {
     var displayObject2 = displayObject[i];
 
     if (displayObject.x + displayObject.width > displayObject2.x) {
@@ -1546,7 +1546,7 @@ Bump.prototype.hitTestRight = function(displayObject, displayObjects) {
 
 // Only hitTest top side of the object
 Bump.prototype.hitTestTop = function(displayObject, displayObjects) {
-  for (var i = 0; i < displayObjects.length; i++) {
+  for (var i = displayObjects.length - 1; i >= 0; i--) {
     var displayObject2 = displayObject[i];
 
     if (displayObject.y < displayObject2.y + displayObject2.height) {
@@ -1557,7 +1557,7 @@ Bump.prototype.hitTestTop = function(displayObject, displayObjects) {
 
 // Only hitTest bottom side of the object
 Bump.prototype.hitTestBottom = function(displayObject, displayObjects) {
-  for (var i = 0; i < displayObjects.length; i++) {
+  for (var i = displayObjects.length - 1; i >= 0; i--) {
     var displayObject2 = displayObject[i];
 
     if (displayObject.height + displayObject.y > displayObject2.y) {
