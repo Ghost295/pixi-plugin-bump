@@ -1,0 +1,19 @@
+{
+  "printWidth": 120,
+  "singleQuote": false,
+  "bracketSpacing": true,
+  "trailingComma": "es5",
+  "breakBeforeElse": true,
+  "tabWidth": 2,
+  "useTabs": false,
+  "arrayExpand": true,
+  "parser": "typescript",
+  "overrides": [
+    {
+      "files": [".prettierrc", "package.json"],
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
+}

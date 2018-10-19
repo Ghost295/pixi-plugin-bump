@@ -3,35 +3,95 @@ declare namespace PIXI.extras {
   class Bump {
     public renderer: string;
     constructor();
-    addCollisionProperties(sprite: PIXI.Sprite | PIXI.extras.AnimatedSprite): void;
-    hitTestPoint(point: { x: number; y: number }, sprite: PIXI.Sprite | PIXI.extras.AnimatedSprite): void;
-    hitTestCircle(c1: PIXI.Circle, c2: PIXI.Circle, global: boolean): void;
-    circleCollision(c1: PIXI.Circle, c2: PIXI.Circle, bounce: boolean, global: boolean): void;
-    movingCircleCollision(c1: PIXI.Circle, c2: PIXI.Circle, global: boolean): void;
-    multipleCircleCollision(circles: PIXI.Circle[], global: boolean): void;
-    rectangleCollision(r1: PIXI.Rectangle, r2, bounce: boolean, global: boolean): void;
-    hitTestRectangle(r1: PIXI.Rectangle, r2, global: boolean): void;
-    hitTestCircleRectangle(c1: PIXI.Circle, r1: PIXI.Rectangle, global: boolean): void;
-    hitTestCirclePoint(c1: PIXI.Circle, point: { x: number; y: number }, global: boolean): void;
-    circleRectangleCollision(c1: PIXI.Circle, r1: PIXI.Rectangle, bounce: boolean, global: boolean): void;
-    circlePointCollision(c1: PIXI.Circle, point: { x: number; y: number }, bounce: boolean, global: boolean): void;
-    bounceOffSurface(o, s): void;
+    addCollisionProperties(sprite: PIXI.DisplayObject): void;
+    hitTestPoint(
+      point: { x: number; y: number },
+      sprite: PIXI.DisplayObject,
+    ): boolean;
+    hitTestCircle(c1: PIXI.Circle, c2: PIXI.Circle, global: boolean): boolean;
+    circleCollision(
+      c1: PIXI.Circle,
+      c2: PIXI.Circle,
+      bounce: boolean,
+      global: boolean,
+    ): boolean;
+    movingCircleCollision(
+      c1: PIXI.Circle,
+      c2: PIXI.Circle,
+      global: boolean,
+    ): boolean;
+    multipleCircleCollision(circles: PIXI.Circle[], global: boolean): boolean;
+    multipleCollision(sprites: PIXI.DisplayObject[], global: boolean): boolean;
+    rectangleCollision(
+      r1: PIXI.Rectangle,
+      r2,
+      bounce: boolean,
+      global: boolean,
+    ): boolean;
+    hitTestRectangle(r1: PIXI.Rectangle, r2, global: boolean): boolean;
+    hitTestCircleRectangle(
+      c1: PIXI.Circle,
+      r1: PIXI.Rectangle,
+      global: boolean,
+    ): boolean;
+    hitTestCirclePoint(
+      c1: PIXI.Circle,
+      point: { x: number; y: number },
+      global: boolean,
+    ): boolean;
+    circleRectangleCollision(
+      c1: PIXI.Circle,
+      r1: PIXI.Rectangle,
+      bounce: boolean,
+      global: boolean,
+    ): boolean;
+    circlePointCollision(
+      c1: PIXI.Circle,
+      point: { x: number; y: number },
+      bounce: boolean,
+      global: boolean,
+    ): boolean;
+    bounceOffSurface(o, s): boolean;
     contain(
-      sprite: PIXI.Sprite | PIXI.extras.AnimatedSprite,
+      sprite: PIXI.DisplayObject,
       container: PIXI.Container,
       bounce: boolean,
       extra: Function,
-    ): void;
-    outsideBounds(sprite: PIXI.Sprite | PIXI.extras.AnimatedSprite, bounds, extra: Function): void;
-    _getCenter(o, dimension, axis): void;
+    ): boolean;
+    outsideBounds(sprite: PIXI.DisplayObject, bounds, extra: Function): boolean;
     hit(
-      sprite: PIXI.Sprite | PIXI.extras.AnimatedSprite,
+      sprite: PIXI.DisplayObject,
       sprites: PIXI.DisplayObject[],
       react: boolean,
       bounce: boolean,
       global: boolean,
       extra: Function,
-    ): void;
+    ): boolean;
+    hitTest(
+      sprite: PIXI.DisplayObject,
+      sprites: PIXI.DisplayObject[],
+    ): { top: boolean; right: boolean; bottom: boolean; left: boolean };
+    hitTestDirections(
+      sprite: PIXI.DisplayObject,
+      sprites: PIXI.DisplayObject[],
+      directions: string[],
+    ): { top: boolean; right: boolean; bottom: boolean; left: boolean };
+    hitTestLeft(
+      sprite: PIXI.DisplayObject,
+      sprites: PIXI.DisplayObject[],
+    ): boolean;
+    hitTestRight(
+      sprite: PIXI.DisplayObject,
+      sprites: PIXI.DisplayObject[],
+    ): boolean;
+    hitTestTop(
+      sprite: PIXI.DisplayObject,
+      sprites: PIXI.DisplayObject[],
+    ): boolean;
+    hitTestBottom(
+      sprite: PIXI.DisplayObject,
+      sprites: PIXI.DisplayObject[],
+    ): boolean;
   }
 }
 

@@ -1,6 +1,6 @@
 /*!
- * pixi-plugin-bump - v1.1.0
- * Compiled Thu, 18 Oct 2018 20:43:52 UTC
+ * pixi-plugin-bump - v1.1.3
+ * Compiled Fri, 19 Oct 2018 14:50:56 UTC
  *
  * pixi-plugin-bump is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -101,8 +101,7 @@ Bump.prototype.addCollisionProperties = function(sprite) {
         get: function() {
           if (sprite.anchor !== undefined) {
             return sprite.width * sprite.anchor.x;
-          }
-          else {
+          } else {
             return 0;
           }
         },
@@ -117,8 +116,7 @@ Bump.prototype.addCollisionProperties = function(sprite) {
         get: function() {
           if (sprite.anchor !== undefined) {
             return sprite.height * sprite.anchor.y;
-          }
-          else {
+          } else {
             return 0;
           }
         },
@@ -214,8 +212,7 @@ Bump.prototype.hitTestPoint = function(point, sprite) {
   //on whether it has a `radius` property
   if (sprite.radius) {
     shape = "circle";
-  }
-  else {
+  } else {
     shape = "rectangle";
   }
 
@@ -269,8 +266,7 @@ Bump.prototype.hitTestCircle = function(c1, c2, global) {
     //Use global coordinates
     vx = c2.gx + c2.width / 2 - c2.xAnchorOffset - (c1.gx + c1.width / 2 - c1.xAnchorOffset);
     vy = c2.gy + c2.width / 2 - c2.yAnchorOffset - (c1.gy + c1.width / 2 - c1.yAnchorOffset);
-  }
-  else {
+  } else {
     //Use local coordinates
     vx = c2.x + c2.width / 2 - c2.xAnchorOffset - (c1.x + c1.width / 2 - c1.xAnchorOffset);
     vy = c2.y + c2.width / 2 - c2.yAnchorOffset - (c1.y + c1.width / 2 - c1.yAnchorOffset);
@@ -326,8 +322,7 @@ Bump.prototype.circleCollision = function(c1, c2, bounce, global) {
     //Use global coordinates
     vx = c2.gx + c2.width / 2 - c2.xAnchorOffset - (c1.gx + c1.width / 2 - c1.xAnchorOffset);
     vy = c2.gy + c2.width / 2 - c2.yAnchorOffset - (c1.gy + c1.width / 2 - c1.yAnchorOffset);
-  }
-  else {
+  } else {
     //Use local coordinates
     vx = c2.x + c2.width / 2 - c2.xAnchorOffset - (c1.x + c1.width / 2 - c1.xAnchorOffset);
     vy = c2.y + c2.width / 2 - c2.yAnchorOffset - (c1.y + c1.width / 2 - c1.yAnchorOffset);
@@ -420,8 +415,7 @@ Bump.prototype.movingCircleCollision = function(c1, c2, global) {
     //Use global coordinates
     s.vx = c2.gx + c2.radius - c2.xAnchorOffset - (c1.gx + c1.radius - c1.xAnchorOffset);
     s.vy = c2.gy + c2.radius - c2.yAnchorOffset - (c1.gy + c1.radius - c1.yAnchorOffset);
-  }
-  else {
+  } else {
     //Use local coordinates
     s.vx = c2.x + c2.radius - c2.xAnchorOffset - (c1.x + c1.radius - c1.xAnchorOffset);
     s.vy = c2.y + c2.radius - c2.yAnchorOffset - (c1.y + c1.radius - c1.yAnchorOffset);
@@ -452,8 +446,8 @@ Bump.prototype.movingCircleCollision = function(c1, c2, global) {
 
     //Find the collision vector.
     //Divide it in half to share between the circles, and make it absolute
-    s.vxHalf = Math.abs(s.dx * overlap / 2);
-    s.vyHalf = Math.abs(s.dy * overlap / 2);
+    s.vxHalf = Math.abs((s.dx * overlap) / 2);
+    s.vyHalf = Math.abs((s.dy * overlap) / 2);
 
     //Find the side that the collision is occurring on
     xSide = c1.x > c2.x ? 1 : -1;
@@ -555,6 +549,27 @@ Bump.prototype.multipleCircleCollision = function(arrayOfCircles, global) {
 };
 
 /*
+checkMultipleCollision
+-----------------------
+
+*/
+Bump.prototype.checkMultipleCollision = function(displayObject, bounce, global) {
+  for (var i = 0; i < displayObject.length; i++) {
+    var rect1 = displayObject[i];
+
+    for (var j = i + 1; j < displayObject.length; j++) {
+      var rect2 = displayObject[j];
+
+      if (!bounce) {
+        return hitTestRectangle(rect1, rect2, global);
+      } else {
+        return rectangleCollision(rect1, rect2, bounce, global);
+      }
+    }
+  }
+};
+
+/*
 rectangleCollision
 ------------------
 
@@ -578,8 +593,7 @@ Bump.prototype.rectangleCollision = function(r1, r2, bounce, global) {
   if (global) {
     vx = r1.gx + Math.abs(r1.halfWidth) - r1.xAnchorOffset - (r2.gx + Math.abs(r2.halfWidth) - r2.xAnchorOffset);
     vy = r1.gy + Math.abs(r1.halfHeight) - r1.yAnchorOffset - (r2.gy + Math.abs(r2.halfHeight) - r2.yAnchorOffset);
-  }
-  else {
+  } else {
     //vx = r1.centerX - r2.centerX;
     //vy = r1.centerY - r2.centerY;
     vx = r1.x + Math.abs(r1.halfWidth) - r1.xAnchorOffset - (r2.x + Math.abs(r2.halfWidth) - r2.xAnchorOffset);
@@ -612,8 +626,7 @@ Bump.prototype.rectangleCollision = function(r1, r2, bounce, global) {
           collision = "top";
           //Move the rectangle out of the collision
           r1.y = r1.y + overlapY;
-        }
-        else {
+        } else {
           collision = "bottom";
           //Move the rectangle out of the collision
           r1.y = r1.y - overlapY;
@@ -633,8 +646,7 @@ Bump.prototype.rectangleCollision = function(r1, r2, bounce, global) {
             //this.bounceOffSurface(r1, s);
             */
         }
-      }
-      else {
+      } else {
         //The collision is happening on the Y axis
         //But on which side? vx can tell us
 
@@ -642,8 +654,7 @@ Bump.prototype.rectangleCollision = function(r1, r2, bounce, global) {
           collision = "left";
           //Move the rectangle out of the collision
           r1.x = r1.x + overlapX;
-        }
-        else {
+        } else {
           collision = "right";
           //Move the rectangle out of the collision
           r1.x = r1.x - overlapX;
@@ -664,12 +675,10 @@ Bump.prototype.rectangleCollision = function(r1, r2, bounce, global) {
             */
         }
       }
-    }
-    else {
+    } else {
       //No collision
     }
-  }
-  else {
+  } else {
     //No collision
   }
 
@@ -702,8 +711,7 @@ Bump.prototype.hitTestRectangle = function(r1, r2, global) {
   if (global) {
     vx = r1.gx + Math.abs(r1.halfWidth) - r1.xAnchorOffset - (r2.gx + Math.abs(r2.halfWidth) - r2.xAnchorOffset);
     vy = r1.gy + Math.abs(r1.halfHeight) - r1.yAnchorOffset - (r2.gy + Math.abs(r2.halfHeight) - r2.yAnchorOffset);
-  }
-  else {
+  } else {
     vx = r1.x + Math.abs(r1.halfWidth) - r1.xAnchorOffset - (r2.x + Math.abs(r2.halfWidth) - r2.xAnchorOffset);
     vy = r1.y + Math.abs(r1.halfHeight) - r1.yAnchorOffset - (r2.y + Math.abs(r2.halfHeight) - r2.yAnchorOffset);
   }
@@ -718,13 +726,11 @@ Bump.prototype.hitTestRectangle = function(r1, r2, global) {
     if (Math.abs(vy) < combinedHalfHeights) {
       //There's definitely a collision happening
       hit = true;
-    }
-    else {
+    } else {
       //There's no collision on the y axis
       hit = false;
     }
-  }
-  else {
+  } else {
     //There's no collision on the x axis
     hit = false;
   }
@@ -756,8 +762,7 @@ Bump.prototype.hitTestCircleRectangle = function(c1, r1, global) {
     c1y = c1.gy;
     r1x = r1.gx;
     r1y = r1.gy;
-  }
-  else {
+  } else {
     c1x = c1.x;
     c1y = c1.y;
     r1x = r1.x;
@@ -770,36 +775,29 @@ Bump.prototype.hitTestCircleRectangle = function(c1, r1, global) {
     //top left, top center or top right
     if (c1x - c1.xAnchorOffset < r1x - 1 - Math.abs(r1.halfWidth) - r1.xAnchorOffset) {
       region = "topLeft";
-    }
-    else if (c1x - c1.xAnchorOffset > r1x + 1 + Math.abs(r1.halfWidth) - r1.xAnchorOffset) {
+    } else if (c1x - c1.xAnchorOffset > r1x + 1 + Math.abs(r1.halfWidth) - r1.xAnchorOffset) {
       region = "topRight";
-    }
-    else {
+    } else {
       region = "topMiddle";
     }
-  }
-  else if (c1y - c1.yAnchorOffset > r1y + Math.abs(r1.halfHeight) - r1.yAnchorOffset) {
+  } else if (c1y - c1.yAnchorOffset > r1y + Math.abs(r1.halfHeight) - r1.yAnchorOffset) {
     //The circle isn't above the top edge, so it might be
     //below the bottom edge
     //If it is, we need to check whether it's in the bottom left,
     //bottom center, or bottom right
     if (c1x - c1.xAnchorOffset < r1x - 1 - Math.abs(r1.halfWidth) - r1.xAnchorOffset) {
       region = "bottomLeft";
-    }
-    else if (c1x - c1.xAnchorOffset > r1x + 1 + Math.abs(r1.halfWidth) - r1.xAnchorOffset) {
+    } else if (c1x - c1.xAnchorOffset > r1x + 1 + Math.abs(r1.halfWidth) - r1.xAnchorOffset) {
       region = "bottomRight";
-    }
-    else {
+    } else {
       region = "bottomMiddle";
     }
-  }
-  else {
+  } else {
     //The circle isn't above the top edge or below the bottom edge,
     //so it must be on the left or right side
     if (c1x - c1.xAnchorOffset < r1x - Math.abs(r1.halfWidth) - r1.xAnchorOffset) {
       region = "leftMiddle";
-    }
-    else {
+    } else {
       region = "rightMiddle";
     }
   }
@@ -809,8 +807,7 @@ Bump.prototype.hitTestCircleRectangle = function(c1, r1, global) {
   if (region === "topMiddle" || region === "bottomMiddle" || region === "leftMiddle" || region === "rightMiddle") {
     //Yes, it is, so do a standard rectangle vs. rectangle collision test
     collision = this.hitTestRectangle(c1, r1, global);
-  }
-  else {
+  } else {
     //The circle is touching one of the corners, so do a
     //circle vs. point collision test
     var point = {};
@@ -844,8 +841,7 @@ Bump.prototype.hitTestCircleRectangle = function(c1, r1, global) {
   //The return value will be `undefined` if there's no collision
   if (collision) {
     return region;
-  }
-  else {
+  } else {
     return collision;
   }
 };
@@ -904,8 +900,7 @@ Bump.prototype.circleRectangleCollision = function(c1, r1, bounce, global) {
     c1y = c1.gy;
     r1x = r1.gx;
     r1y = r1.gy;
-  }
-  else {
+  } else {
     c1x = c1.x;
     c1y = c1.y;
     r1x = r1.x;
@@ -918,36 +913,29 @@ Bump.prototype.circleRectangleCollision = function(c1, r1, bounce, global) {
     //top left, top center or top right
     if (c1x - c1.xAnchorOffset < r1x - 1 - Math.abs(r1.halfWidth) - r1.xAnchorOffset) {
       region = "topLeft";
-    }
-    else if (c1x - c1.xAnchorOffset > r1x + 1 + Math.abs(r1.halfWidth) - r1.xAnchorOffset) {
+    } else if (c1x - c1.xAnchorOffset > r1x + 1 + Math.abs(r1.halfWidth) - r1.xAnchorOffset) {
       region = "topRight";
-    }
-    else {
+    } else {
       region = "topMiddle";
     }
-  }
-  else if (c1y - c1.yAnchorOffset > r1y + Math.abs(r1.halfHeight) - r1.yAnchorOffset) {
+  } else if (c1y - c1.yAnchorOffset > r1y + Math.abs(r1.halfHeight) - r1.yAnchorOffset) {
     //The circle isn't above the top edge, so it might be
     //below the bottom edge
     //If it is, we need to check whether it's in the bottom left,
     //bottom center, or bottom right
     if (c1x - c1.xAnchorOffset < r1x - 1 - Math.abs(r1.halfWidth) - r1.xAnchorOffset) {
       region = "bottomLeft";
-    }
-    else if (c1x - c1.xAnchorOffset > r1x + 1 + Math.abs(r1.halfWidth) - r1.xAnchorOffset) {
+    } else if (c1x - c1.xAnchorOffset > r1x + 1 + Math.abs(r1.halfWidth) - r1.xAnchorOffset) {
       region = "bottomRight";
-    }
-    else {
+    } else {
       region = "bottomMiddle";
     }
-  }
-  else {
+  } else {
     //The circle isn't above the top edge or below the bottom edge,
     //so it must be on the left or right side
     if (c1x - c1.xAnchorOffset < r1x - Math.abs(r1.halfWidth) - r1.xAnchorOffset) {
       region = "leftMiddle";
-    }
-    else {
+    } else {
       region = "rightMiddle";
     }
   }
@@ -957,8 +945,7 @@ Bump.prototype.circleRectangleCollision = function(c1, r1, bounce, global) {
   if (region === "topMiddle" || region === "bottomMiddle" || region === "leftMiddle" || region === "rightMiddle") {
     //Yes, it is, so do a standard rectangle vs. rectangle collision test
     collision = this.rectangleCollision(c1, r1, bounce, global);
-  }
-  else {
+  } else {
     //The circle is touching one of the corners, so do a
     //circle vs. point collision test
     var point = {};
@@ -990,8 +977,7 @@ Bump.prototype.circleRectangleCollision = function(c1, r1, bounce, global) {
 
   if (collision) {
     return region;
-  }
-  else {
+  } else {
     return collision;
   }
 };
@@ -1350,23 +1336,14 @@ Bump.prototype._getCenter = function(o, dimension, axis) {
   if (o.anchor !== undefined) {
     if (o.anchor[axis] !== 0) {
       return 0;
-    }
-    else {
+    } else {
       //console.log(o.anchor[axis])
       return dimension / 2;
     }
-  }
-  else {
+  } else {
     return dimension;
   }
 };
-
-/*
-  hit
-  ---
-  A convenient universal collision function to test for collisions
-  between rectangles, circles, and points.
-  */
 
 Bump.prototype.hit = function(a, b, react, bounce, global, extra) {
   //Local references to bump's collision methods
@@ -1387,8 +1364,7 @@ Bump.prototype.hit = function(a, b, react, bounce, global, extra) {
   if ((aIsASprite && b instanceof Array) || (bIsASprite && a instanceof Array)) {
     //If it is, check for a collision between a sprite and an array
     spriteVsArray();
-  }
-  else {
+  } else {
     //If one of the arguments isn't an array, find out what type of
     //collision check to run
     collision = findCollisionType(a, b);
@@ -1413,23 +1389,19 @@ Bump.prototype.hit = function(a, b, react, bounce, global, extra) {
       if (a.diameter && b.diameter) {
         //They're circles
         return circleVsCircle(a, b);
-      }
-      else if (a.diameter && !b.diameter) {
+      } else if (a.diameter && !b.diameter) {
         //The first one is a circle and the second is a rectangle
         return circleVsRectangle(a, b);
-      }
-      else {
+      } else {
         //They're rectangles
         return rectangleVsRectangle(a, b);
       }
-    }
-    else if (bIsASprite && a.x !== undefined && a.y !== undefined) {
+    } else if (bIsASprite && a.x !== undefined && a.y !== undefined) {
       //They're not both sprites, so what are they?
       //Is `a` not a sprite and does it have x and y properties?
       //Yes, so this is a point vs. sprite collision test
       return hitTestPoint(a, b);
-    }
-    else {
+    } else {
       //The user is trying to test some incompatible objects
       throw new Error("I'm sorry, " + a + " and " + b + " cannot be use together in a collision test.'");
     }
@@ -1455,8 +1427,7 @@ Bump.prototype.hit = function(a, b, react, bounce, global, extra) {
     //just test to see if they're touching
     if (!react) {
       return hitTestCircle(a, b);
-    }
-    else {
+    } else {
       //Yes, the circles should react to the collision
       //Are they both moving?
       if (a.vx + a.vy !== 0 && b.vx + b.vy !== 0) {
@@ -1464,8 +1435,7 @@ Bump.prototype.hit = function(a, b, react, bounce, global, extra) {
         //(moving circle collisions always bounce apart so there's
         //no need for the third, `bounce`, argument)
         return movingCircleCollision(a, b, global);
-      }
-      else {
+      } else {
         //No, they're not both moving
         return circleCollision(a, b, bounce, global);
       }
@@ -1477,8 +1447,7 @@ Bump.prototype.hit = function(a, b, react, bounce, global, extra) {
     //test to see if they're touching
     if (!react) {
       return hitTestRectangle(a, b, global);
-    }
-    else {
+    } else {
       return rectangleCollision(a, b, bounce, global);
     }
   }
@@ -1488,9 +1457,111 @@ Bump.prototype.hit = function(a, b, react, bounce, global, extra) {
     //test to see if they're touching
     if (!react) {
       return hitTestCircleRectangle(a, b, global);
-    }
-    else {
+    } else {
       return circleRectangleCollision(a, b, bounce, global);
+    }
+  }
+};
+
+/*
+hitTest
+-----------------------
+// Test each directions and return true for each if hitTest is verified
+
+// var rect1 = displayObject.getGlobalPosition();
+// rect1.width = displayObject.width;
+// rect1.height = displayObject.height;
+// var rect2 = displayObject2.getGlobalPosition();
+// rect2.width = displayObject2.width;
+// rect2.height = displayObject2.height;
+
+// if (rect1.x < rect2.x + rect2.width &&
+//   rect1.x + rect1.width > rect2.x &&
+//   rect1.y < rect2.y + rect2.height &&
+//   rect1.height + rect1.y > rect2.y) {
+//   return true;
+// }
+*/
+Bump.prototype.hitTest = function(displayObject, displayObjects) {
+  var hitDirections = {
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  };
+
+  for (var i = 0; i < displayObjects.length; i++) {
+    var displayObject2 = displayObject[i];
+
+    if (displayObject.x < displayObject2.x + displayObject2.width) {
+      hitDirections.left = true;
+    }
+    if (displayObject.x + displayObject.width > displayObject2.x) {
+      hitDirections.right = true;
+    }
+    if (displayObject.y < displayObject2.y + displayObject2.height) {
+      hitDirections.top = true;
+    }
+    if (displayObject.height + displayObject.y > displayObject2.y) {
+      hitDirections.bottom = true;
+    }
+  }
+
+  return hitDirections;
+};
+
+// Only hitTest defines directions of the object
+// for ex, directions = ['top', 'bottom'];
+Bump.prototype.hitTestDirections = function(displayObject, displayObjects, directions) {
+  var hitDirections = this.hitTest(displayObject, displayObjects);
+  for (var i in hitDirections) {
+    if (directions.indexOf(i) === -1) {
+      hitDirections[i] = false;
+    }
+  }
+  return hitDirections;
+};
+
+// Only hitTest left side of the object
+Bump.prototype.hitTestLeft = function(displayObject, displayObjects) {
+  for (var i = 0; i < displayObjects.length; i++) {
+    var displayObject2 = displayObject[i];
+
+    if (displayObject.x < displayObject2.x + displayObject2.width) {
+      return true;
+    }
+  }
+};
+
+// Only hitTest right side of the object
+Bump.prototype.hitTestRight = function(displayObject, displayObjects) {
+  for (var i = 0; i < displayObjects.length; i++) {
+    var displayObject2 = displayObject[i];
+
+    if (displayObject.x + displayObject.width > displayObject2.x) {
+      return true;
+    }
+  }
+};
+
+// Only hitTest top side of the object
+Bump.prototype.hitTestTop = function(displayObject, displayObjects) {
+  for (var i = 0; i < displayObjects.length; i++) {
+    var displayObject2 = displayObject[i];
+
+    if (displayObject.y < displayObject2.y + displayObject2.height) {
+      return true;
+    }
+  }
+};
+
+// Only hitTest bottom side of the object
+Bump.prototype.hitTestBottom = function(displayObject, displayObjects) {
+  for (var i = 0; i < displayObjects.length; i++) {
+    var displayObject2 = displayObject[i];
+
+    if (displayObject.height + displayObject.y > displayObject2.y) {
+      return true;
     }
   }
 };
