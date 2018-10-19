@@ -1519,7 +1519,7 @@ Bump.prototype.hitTestLeft = function(displayObject, displayObjects) {
   for (var i = displayObjects.length - 1; i >= 0; i--) {
     var displayObject2 = displayObjects[i];
     if (
-      displayObject.height + displayObject.y > displayObjects[i].y &&
+      displayObject.height + displayObject.y > displayObject2.y &&
       displayObject.y < displayObject2.y + displayObject2.height &&
       displayObject.x < displayObject2.x + displayObject2.width
     ) {
@@ -1531,10 +1531,11 @@ Bump.prototype.hitTestLeft = function(displayObject, displayObjects) {
 // Only hitTest right side of the object
 Bump.prototype.hitTestRight = function(displayObject, displayObjects) {
   for (var i = displayObjects.length - 1; i >= 0; i--) {
+    var displayObject2 = displayObjects[i];
     if (
-      displayObject.height + displayObject.y > displayObjects[i].y &&
+      displayObject.height + displayObject.y > displayObject2.y &&
       displayObject.y < displayObject2.y + displayObject2.height &&
-      displayObject.x + displayObject.width > displayObjects[i].x
+      displayObject.x + displayObject.width > displayObject2.x
     ) {
       return true;
     }
@@ -1546,7 +1547,7 @@ Bump.prototype.hitTestTop = function(displayObject, displayObjects) {
   for (var i = displayObjects.length - 1; i >= 0; i--) {
     var displayObject2 = displayObjects[i];
     if (
-      displayObject.x + displayObject.width > displayObjects[i].x &&
+      displayObject.x + displayObject.width > displayObject2.x &&
       displayObject.x < displayObject2.x + displayObject2.width &&
       displayObject.y < displayObject2.y + displayObject2.height
     ) {
@@ -1558,10 +1559,11 @@ Bump.prototype.hitTestTop = function(displayObject, displayObjects) {
 // Only hitTest bottom side of the object
 Bump.prototype.hitTestBottom = function(displayObject, displayObjects) {
   for (var i = displayObjects.length - 1; i >= 0; i--) {
+    var displayObject2 = displayObjects[i];
     if (
-      displayObject.x + displayObject.width > displayObjects[i].x &&
+      displayObject.x + displayObject.width > displayObject2.x &&
       displayObject.x < displayObject2.x + displayObject2.width &&
-      displayObject.height + displayObject.y > displayObjects[i].y
+      displayObject.height + displayObject.y > displayObject2.y
     ) {
       return true;
     }
