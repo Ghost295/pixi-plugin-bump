@@ -1,6 +1,6 @@
 /*!
- * pixi-plugin-bump - v1.1.6
- * Compiled Fri, 19 Oct 2018 20:25:27 UTC
+ * pixi-plugin-bump - v1.1.7
+ * Compiled Fri, 19 Oct 2018 21:06:51 UTC
  *
  * pixi-plugin-bump is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -1526,7 +1526,11 @@ Bump.prototype.hitTestDirections = function(displayObject, displayObjects, direc
 Bump.prototype.hitTestLeft = function(displayObject, displayObjects) {
   for (var i = displayObjects.length - 1; i >= 0; i--) {
     var displayObject2 = displayObjects[i];
-    if (displayObject.x < displayObject2.x + displayObject2.width) {
+    if (
+      displayObject.height + displayObject.y > displayObjects[i].y &&
+      displayObject.y < displayObject2.y + displayObject2.height &&
+      displayObject.x < displayObject2.x + displayObject2.width
+    ) {
       return true;
     }
   }
@@ -1535,7 +1539,11 @@ Bump.prototype.hitTestLeft = function(displayObject, displayObjects) {
 // Only hitTest right side of the object
 Bump.prototype.hitTestRight = function(displayObject, displayObjects) {
   for (var i = displayObjects.length - 1; i >= 0; i--) {
-    if (displayObject.x + displayObject.width > displayObjects[i].x) {
+    if (
+      displayObject.height + displayObject.y > displayObjects[i].y &&
+      displayObject.y < displayObject2.y + displayObject2.height &&
+      displayObject.x + displayObject.width > displayObjects[i].x
+    ) {
       return true;
     }
   }
@@ -1545,7 +1553,11 @@ Bump.prototype.hitTestRight = function(displayObject, displayObjects) {
 Bump.prototype.hitTestTop = function(displayObject, displayObjects) {
   for (var i = displayObjects.length - 1; i >= 0; i--) {
     var displayObject2 = displayObjects[i];
-    if (displayObject.y < displayObject2.y + displayObject2.height) {
+    if (
+      displayObject.x + displayObject.width > displayObjects[i].x &&
+      displayObject.x < displayObject2.x + displayObject2.width &&
+      displayObject.y < displayObject2.y + displayObject2.height
+    ) {
       return true;
     }
   }
@@ -1554,7 +1566,11 @@ Bump.prototype.hitTestTop = function(displayObject, displayObjects) {
 // Only hitTest bottom side of the object
 Bump.prototype.hitTestBottom = function(displayObject, displayObjects) {
   for (var i = displayObjects.length - 1; i >= 0; i--) {
-    if (displayObject.height + displayObject.y > displayObjects[i].y) {
+    if (
+      displayObject.x + displayObject.width > displayObjects[i].x &&
+      displayObject.x < displayObject2.x + displayObject2.width &&
+      displayObject.height + displayObject.y > displayObjects[i].y
+    ) {
       return true;
     }
   }
