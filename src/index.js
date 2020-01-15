@@ -4,6 +4,6 @@ var Bump = {
 
 //dump everything into extras
 
-Object.assign(PIXI.extras, Bump);
+Object.assign(PIXI, Bump);
 
 module.exports = Bump;
