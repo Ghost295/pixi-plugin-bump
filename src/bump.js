@@ -1410,7 +1410,7 @@ Bump.prototype.hit = function(a, b, react, bounce, global, extra) {
     for (var i = b.length - 1; i >= 0; i--) {
       var sprite = b[i];
       collision = findCollisionType(a, sprite);
-      if (collision && extra) extra(collision, sprite);
+      if (collision && extra) extra(collision, sprite, a);
     }
   }
 
